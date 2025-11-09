@@ -12,7 +12,7 @@ def test_cli_missing_files():
     argv = ['--report', 'average-rating']
     with pytest.raises(SystemExit) as exc_info:
         main(argv)
-    assert exc_info.value.code != 0  # обычно 2 для argparse
+    assert exc_info.value.code != 0
 
 
 def test_cli_missing_report():
@@ -27,7 +27,12 @@ def test_cli_invalid_report():
     with pytest.raises(SystemExit) as exc_info:
         main(argv)
     assert exc_info.value.code != 0
-
+    
+def test_cli_invalid_file():
+    argv = ['--files', 'a.csv', '--report', 'average-rating']
+    with pytest.raises(SystemExit) as exc_info:
+        main(argv)
+    assert exc_info.value.code != 0
 
 def test_cli_no_arguments():
     argv = []
